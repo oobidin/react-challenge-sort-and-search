@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 export default class SearchBar extends Component {
   
   handleChange(e) {
-      this.props.update(e.target.value)
+      if (this.props.update)
+        this.props.update(e.target.value)
+       else
+        return;
   }
   
   render() {
