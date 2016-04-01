@@ -5,6 +5,8 @@ import UserActive from './components/UserActive';
 import UserList from './components/UserList';
 import Preloader from './components/Preloader';
 
+const dataURL = 'data.json';
+
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +20,7 @@ export default class App extends Component {
     }
   
     componentDidMount() {
-        $.getJSON('data.json', (data) => {
+        $.getJSON(dataURL, (data) => {
             this.setState({
                 data: data,
                 activeData: data
@@ -41,7 +43,10 @@ export default class App extends Component {
     doSort(by, asc) {
         let activeData = this.state.activeData;
         activeData.sort(asc ? (a, b) => a[by] > b[by] ? 1 : a[by] == b[by] ? 0 : -1 : (a, b) => b[by] > a[by] ? 1 : a[by] == b[by] ? 0 : -1);
-        this.setState({activeData: activeData});
+        
+        this.setState({
+            activeData: activeData
+        });
     }
 
     getUser(id) {

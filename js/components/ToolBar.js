@@ -3,19 +3,13 @@ import React, { Component } from 'react';
 export default class ToolBar extends Component {
     componentDidMount() {
         this.setState({
-            nameAsc: 1,
-            ageAsc: 1
+            by: '',
+            asc: 1
         });
     }
   
     buttonClick(by) {
-        const name = `${by}Asc`;
-        const asc = this.state[name];
-        this.props.buttonClick(by, asc);
-
-        let newState = {};
-        newState[name] = !asc;
-        this.setState(newState);
+        this.setState((prev) => ({by: by, asc: prev.by == by ? !prev.asc : 1}), () => {this.props.buttonClick(by, this.state.asc)});
     }
   
     render() {

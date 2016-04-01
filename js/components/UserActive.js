@@ -5,6 +5,7 @@ export default class UserActive extends Component {
         if (!this.props.data)
             return (
                 <div className="col-sm-4 col-md-3 col-lg-2">
+                    <h3>Nothing found :(</h3>
                 </div>
             );
 
