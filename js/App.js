@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import SearchBar from './components/SearchBar';
 import ToolBar from './components/ToolBar';
-import UserData from './components/UserData';
+import UserActive from './components/UserActive';
+import UserList from './components/UserList';
 
 export default class App extends Component {
   constructor(props) {
@@ -34,12 +35,25 @@ export default class App extends Component {
       console.log(by);
   }
 
+  getUser(id) {
+      let data = this.state.data;
+      
+      for (let i = 0; i < data.length; i++)
+        if (data[i].id == id)
+           return data[i];
+      
+      return data[0];
+  }
+
   render() {
     return (
       <div className="app container-fluid">
         <SearchBar update={this.doSearch.bind(this)}/>
         <ToolBar buttonClick={this.doSort}/>
-        <UserData searchValue={this.state.searchValue}/>
+        <div className="row">
+            <UserActive data={this.getUser(this, this.state.active)}/>
+            <UserList searchValue={this.state.searchValue}/>
+        </div>
       </div>
     );
   }
